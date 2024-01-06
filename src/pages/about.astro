@@ -1,7 +1,6 @@
 ---
-import Navigation from '../components/Navigation.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css'
-import Footer from '../components/Footer.astro';
 
 const pageTitle="About Me";
 
@@ -24,52 +23,27 @@ const textCase = "uppercase";
 const verbColor = "#e3d510";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-        <style define:vars={{skillColor, fontWeight, textCase}}>
-            h1 {
-                font-size: 4rem;
-            }
-            .skill {
-                color: var(--skillColor);
-                font-weight: var(--fontWeight);
-                text-transform: var(--textCase);
-            }
-        </style>
-	</head>
-	<body>
-        <Navigation/>
-        <h1>{pageTitle}</h1>
-        <h2>... and my new Astro site!</h2>
-<p>I am <span class="verbColor">working</span> through Astro's introductory tutorial. This is the <span class="verbColor">second</span> page on my website, and it's the <span class="verbColor">first</span> one I <span class="verbColor">built</span> myself!</p>
-<p>This site will <span class="verbColor">update</span> as I <span class="verbColor">complete</span> more of the tutorial, so keep <span class="verbColor">checking</span> back and see how my journey is <span class="verbColor">going</span>!</p>
+<BaseLayout pageTitle={pageTitle}>
+    <h2>... and my new Astro site!</h2>
+    <p>I am <span class="verbColor">working</span> through Astro's introductory tutorial. This is the <span class="verbColor">second</span> page on my website, and it's the <span class="verbColor">first</span> one I <span class="verbColor">built</span> myself!</p>
+    <p>This site will <span class="verbColor">update</span> as I <span class="verbColor">complete</span> more of the tutorial, so keep <span class="verbColor">checking</span> back and see how my journey is <span class="verbColor">going</span>!</p>
 
-<p>Here are a few facts about me:</p
-<ul>
-    <li>My name is {identity.firstName}.</li>
-    <li>I <span class="verbColor">live</span> in {identity.country} and I <span class="verbColor">work</span> as a {identity.occupation}.</li>
-    {identity.hobbies.length >= 2 &&
-        <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
-    }
-</ul>
-<p>My skills are:</p>
-<ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
-</ul>
-{happy && <p>I am <span class="verbColor">happy</span> to be <span class="verbColor">learning</span> Astro!</p>}
+    <p>Here are a few facts about me:</p
+    <ul>
+        <li>My name is {identity.firstName}.</li>
+        <li>I <span class="verbColor">live</span> in {identity.country} and I <span class="verbColor">work</span> as a {identity.occupation}.</li>
+        {identity.hobbies.length >= 2 &&
+            <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+        }
+    </ul>
+    <p>My skills are:</p>
+    <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+    {happy && <p>I am <span class="verbColor">happy</span> to be <span class="verbColor">learning</span> Astro!</p>}
 
-{finished && <p>I <span class="verbColor">finished</span> this tutorial!</p>}
+    {finished && <p>I <span class="verbColor">finished</span> this tutorial!</p>}
 
+    {goal === 3 ? <p>My goal is to <span class="verbColor">finish</span> in 3 days.</p> : <p>My goal is not 3 days.</p>}
 
-        {goal === 3 ? <p>My goal is to <span class="verbColor">finish</span> in 3 days.</p> : <p>My goal is not 3 days.</p>}
-	<Footer />
-    <script>
-        import "../scripts/menu.js";
-    </script>
-    </body>
-</html>
+</BaseLayout>
